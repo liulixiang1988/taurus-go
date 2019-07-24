@@ -38,7 +38,10 @@ func main() {
 	remoteClient.SshSession.Stdout = &stdOut
 	remoteClient.SshSession.Stderr = &stdErr
 
-	remoteClient.SshSession.Run("echo $PATH")
+	err = remoteClient.SshSession.Run("echo $PATH")
+	if err != nil {
+		fmt.Println("run command error:", err)
+	}
 	fmt.Println("result: ", stdOut.String())
 
 	fmt.Printf("error: %s\n", stdErr.String())
